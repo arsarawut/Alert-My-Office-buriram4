@@ -9,14 +9,10 @@ services:
       - key: PYTHON_VERSION
         value: 3.12.0
       - key: MYOFFICE_STATE_PATH
-        value: /var/data/seen_news.json
+        value: /tmp/seen_news.json
       - key: MYOFFICE_LOCK_PATH
-        value: /var/data/check_myoffice_news.lock
+        value: /tmp/check_myoffice_news.lock
       - key: RUN_WEBHOOK_TOKEN
         generateValue: true
       - key: MYOFFICE_ARCHIVED_MAX_PAGES
         value: 0
-    disk:
-      name: myoffice-data
-      mountPath: /var/data
-      sizeGB: 1

@@ -137,7 +137,7 @@ git push -u origin main
 1. ไปที่ [Render Dashboard](https://dashboard.render.com/)
 2. เลือก `New +` > `Blueprint`
 3. เลือก GitHub repo นี้
-4. Render จะอ่าน `render.yaml` และสร้าง web service พร้อม disk ให้
+4. Render จะอ่าน `render.yaml` และสร้าง web service ให้
 5. ตั้งค่า environment variables บน Render ให้ครบ:
 
 ```text
@@ -151,11 +151,13 @@ TELEGRAM_CHAT_ID
 TELEGRAM_CA_FILE
 TELEGRAM_SSL_VERIFY
 RUN_WEBHOOK_TOKEN
-MYOFFICE_STATE_PATH=/var/data/seen_news.json
-MYOFFICE_LOCK_PATH=/var/data/check_myoffice_news.lock
+MYOFFICE_STATE_PATH=/tmp/seen_news.json
+MYOFFICE_LOCK_PATH=/tmp/check_myoffice_news.lock
 ```
 
 ถ้าใช้ `certifi` ปกติบน Render สามารถเว้น `TELEGRAM_CA_FILE` ได้ และตั้ง `TELEGRAM_SSL_VERIFY=true`
+
+หมายเหตุ: Render free tier ไม่รองรับ persistent disk ดังนั้น state ใน `/tmp` อาจหายเมื่อ service restart หรือ redeploy ถ้าต้องการเก็บ state ถาวรบน Render ต้องใช้แผนที่รองรับ disk หรือเปลี่ยนไปเก็บ state ใน external database/storage
 
 ### 3. ทดสอบ endpoint
 
